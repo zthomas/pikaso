@@ -1,0 +1,34 @@
+import Konva from 'konva';
+import { Board } from '../../Board';
+import type { Filters, ShapeConfig, Shapes } from '../../types';
+export declare abstract class ShapeModel<T extends Konva.Group | Konva.Shape = Konva.Group | Konva.Shape, P extends Konva.ShapeConfig = Konva.ShapeConfig> {
+    node: T;
+    config: ShapeConfig;
+    protected readonly board: Board;
+    private readonly flip;
+    private readonly filter;
+    private deleted;
+    constructor(board: Board, node: T, config?: ShapeConfig);
+    get isDeleted(): boolean;
+    flipX(): void;
+    flipY(): void;
+    select(): void;
+    deselect(): void;
+    addFilter(filter: Filters): void;
+    removeFilter(name: Filters['name']): void;
+    delete(): void;
+    undelete(): void;
+    destroy(): void;
+    rotate(theta: number): void;
+    x(): number;
+    y(): number;
+    scale(): import("konva/lib/types").Vector2d;
+    scaleX(): number;
+    scaleY(): number;
+    show(): import("konva/lib/Group").Group | import("konva/lib/Shape").Shape<import("konva/lib/Shape").ShapeConfig>;
+    hide(): import("konva/lib/Group").Group | import("konva/lib/Shape").Shape<import("konva/lib/Shape").ShapeConfig>;
+    update(attributes: Partial<P>): void;
+    to(attributes: Partial<P>): void;
+    private registerEvents;
+    abstract get type(): keyof Shapes;
+}

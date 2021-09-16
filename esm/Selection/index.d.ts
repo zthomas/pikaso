@@ -1,0 +1,38 @@
+import Konva from 'konva';
+import { Board } from '../Board';
+import { ShapeModel } from '../shape/ShapeModel';
+import type { Filters } from '../types';
+export declare class Selection {
+    list: Array<ShapeModel>;
+    transformer: Konva.Transformer;
+    private board;
+    private readonly filter;
+    private zone;
+    private startPointerPosition;
+    constructor(board: Board);
+    get shapes(): ShapeModel<import("konva/lib/Group").Group | import("konva/lib/Shape").Shape<import("konva/lib/Shape").ShapeConfig>, import("konva/lib/Shape").ShapeConfig>[];
+    get isVisible(): boolean;
+    getTransformer(): import("konva/lib/shapes/Transformer").Transformer;
+    find(selector: (shape: ShapeModel) => boolean): void;
+    selectAll(): void;
+    deselectAll(): void;
+    reselect(): void;
+    multi(shapes: ShapeModel[]): void;
+    add(shape: ShapeModel): void;
+    toggle(shape: ShapeModel): void;
+    deselect(shape: ShapeModel): void;
+    delete(): void;
+    moveX(value: number): Promise<unknown>;
+    moveY(value: number): Promise<unknown>;
+    addFilter(filter: Filters): void;
+    removeFilter(name: Filters['name']): void;
+    private createZone;
+    private createTransformer;
+    private onDragZoneStart;
+    private onDragZoneMove;
+    private onDragZoneEnd;
+    private onWindowMouseUp;
+    private onKeyDown;
+    private getParentNode;
+    private isBackgroundNode;
+}

@@ -1,0 +1,34 @@
+import { Board } from './Board';
+import { Events } from './Events';
+import { History } from './History';
+import { Export } from './Export';
+import { Import } from './Import';
+import { Flip } from './Flip';
+import { Cropper } from './Cropper';
+import { Rotation } from './Rotation';
+import { Selection } from './Selection';
+import type { Settings, EventListenerNames, ListenerCallback, Shapes, JsonData } from './types';
+export default class Pikaso {
+    board: Board;
+    export: Export;
+    import: Import;
+    shapes: Shapes;
+    selection: Selection;
+    rotation: Rotation;
+    cropper: Cropper;
+    flip: Flip;
+    events: Events;
+    history: History;
+    private settings;
+    constructor(settings: Settings);
+    loadFromFile(file: File): Promise<void>;
+    loadFromUrl(url: string): Promise<void>;
+    rescale(): void;
+    undo(): void;
+    redo(): void;
+    on(name: EventListenerNames | EventListenerNames[], callback: ListenerCallback): void;
+    off(name: EventListenerNames | EventListenerNames[], callback: ListenerCallback): void;
+    reset(): void;
+    load(data: JsonData): Promise<void>;
+    private init;
+}
